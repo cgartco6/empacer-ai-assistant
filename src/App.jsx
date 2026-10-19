@@ -19,28 +19,24 @@ export default function App() {
   const [showSettings, setShowSettings] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 pb-24 sm:pb-8">
-      {/* Top Bar */}
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-lime-400 selection:text-slate-950">
+      {/* Top Header */}
       <Header onOpenSettings={() => setShowSettings(true)} />
 
-      <main className="max-w-5xl mx-auto px-4 pt-4">
-        {/* Role Control Selector (Client / Admin / Owner) */}
+      {/* Main Content Area with bottom padding to prevent nav overlap */}
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 pt-4 pb-28">
+        {/* Responsive Compact Role Selector */}
         <RoleSelector />
 
-        {/* Tab Navigation */}
-        <Navigation />
-
-        {/* Active Main View Area */}
+        {/* Tab Views */}
         <div className="mt-4">
           {activeTab === 'inbox' && (
-            <>
+            <div className="space-y-6">
               {currentUserRole === 'client' && <ClientDashboard />}
               {currentUserRole === 'admin' && <AdminDashboard />}
               {currentUserRole === 'owner' && <OwnerDashboard />}
-              <div className="mt-6">
-                <ApprovalInbox />
-              </div>
-            </>
+              <ApprovalInbox />
+            </div>
           )}
 
           {activeTab === 'voice' && <VoiceInput />}
@@ -51,7 +47,10 @@ export default function App() {
         </div>
       </main>
 
-      {/* Settings Modal Overlay */}
+      {/* Floating Mobile Navigation Bar */}
+      <Navigation />
+
+      {/* Settings Modal */}
       {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
     </div>
   );
