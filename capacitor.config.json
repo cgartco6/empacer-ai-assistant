@@ -1,0 +1,9 @@
+{
+  "appId": "com.empacer.aiassistant",
+  "appName": "Empacer AI",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
